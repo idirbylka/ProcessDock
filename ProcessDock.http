@@ -1,0 +1,6 @@
+@ProcessDock_HostAddress = http://localhost:5164
+
+GET {{ProcessDock_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
