@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using ProcessDock.Models;
 
 
@@ -12,6 +13,7 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Workspace> Workspaces { get; set;}
+    public DbSet<Project> Projects{ get; set;}
 
     
 }

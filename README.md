@@ -1,21 +1,28 @@
 # ProcessDock
 
-ProcessDock is a backend Web API built with ASP.NET Core for managing business workflows within a workspace-based structure.
+ProcessDock is a backend Web API built with ASP.NET Core for managing business operations and workflows.
 
-The goal of this project is to simulate a real-world business operations system, where companies can manage their processes (projects, tasks, items, etc.) inside isolated workspaces.
+The goal of this project is to simulate a real-world backend system where companies can manage projects, tasks, and operational processes in a structured and scalable way.
 
-This project is being developed step-by-step with a focus on clean architecture, scalability, and real-world backend practices.
+This project is being developed step-by-step with a focus on:
+- clean architecture
+- proper data modeling
+- real-world backend practices
+- long-term scalability
+
+> Note: The project initially started with a "Workspace" concept as the root structure.  
+> During development, the domain model was refined to focus on a project-centered architecture.  
+> This reflects an intentional design evolution based on better understanding of the problem domain.
 
 ---
 
 ## Current Features
 
-### Workspace Module (v1)
-- Create a workspace
-- Retrieve all workspaces
-- Retrieve a workspace by ID
-- Update a workspace
-- Delete a workspace
+### Initial Foundation
+- Basic API setup with ASP.NET Core
+- EF Core integration with SQL Server (Docker)
+- Initial Workspace module (early domain exploration)
+- Project Module (in progress)
 
 ---
 
@@ -98,13 +105,15 @@ This project is designed to evolve into a modular business operations platform.
 
 Planned next features:
 
-- Project and task management
-- Time tracking
-- Validation and error handling improvements
-- Service layer (business logic separation)
+- Project management (core entity)
+- Task management within projects
+- Time tracking (work sessions)
+- Operational metrics (e.g., processed items, effort)
+- Cost calculation
+- Improved validation and error handling
+- Service layer for business logic
 - Authentication and authorization
-- Dockerized application (API + DB)
-- Scalable architecture improvements
+- Modular architecture for future extensions (e.g., barcode systems, integrations)
 
 
 ---
