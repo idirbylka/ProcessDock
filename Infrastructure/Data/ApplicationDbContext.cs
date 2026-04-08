@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using ProcessDock.Models;
+using ProcessDock.Domain.Entities;
 
 
-namespace ProcessDock.Data;
+namespace ProcessDock.Infrastructure.Data;
 
 public class ApplicationDbContext : DbContext
 {
@@ -13,7 +13,7 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Workspace> Workspaces { get; set;}
-    public DbSet<Project> Projects{ get; set;}
+    public DbSet<Project> Projects { get; set; }
 
     
 }

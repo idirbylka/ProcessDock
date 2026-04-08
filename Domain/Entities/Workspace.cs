@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ProcessDock.Models;
+namespace ProcessDock.Domain.Entities;
 
 public class Workspace
 {

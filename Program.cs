@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ProcessDock.Data;
+using ProcessDock.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
