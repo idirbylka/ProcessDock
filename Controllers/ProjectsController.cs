@@ -44,16 +44,7 @@ public class ProjectsController : ControllerBase
             return NotFound();
         }
 
-        var response = new ProjectResponse
-        {
-            Id = project.Id,
-            Name = project.Name,
-            Description = project.Description,
-            Status = project.Status.ToString(),
-            CreatedAtUtc = project.CreatedAtUtc
-        };
-
-        return Ok(response);
+        return Ok(ToProjectResponse(project));
     }
 
     [HttpPost]
@@ -70,7 +61,53 @@ public class ProjectsController : ControllerBase
         _context.Projects.Add(project);
         await _context.SaveChangesAsync();
 
-        var response = new ProjectResponse
+        return CreatedAtAction(nameof(GetProjectById), new { id = project.Id }, ToProjectResponse(project));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ProjectResponse>> UpdateProject(int id, UpdateProjectRequest request )
+    {
+        var project = await _context.Projects.FindAsync(id);
+
+        if (project is null)
+            return NotFound();
+        
+        if (!Enum.TryParse<ProjectStatus>(request.Status, true, out var status))
+        {
+            ModelState.AddModelError(nameof(request.Status), "Invalid project status!");
+            return ValidationProblem(ModelState);
+        }
+
+        project.Name = request.Name;
+        project.Description = request.Description;
+        project.Status = status;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(ToProjectResponse(project));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteProject(int id)
+    {
+        var project = await _context.Projects.FindAsync(id);
+
+        if (project is null)
+           return NotFound();
+        
+        _context.Projects.Remove(project);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Maps a Project entity to a ProjectResponse DTO.
+    /// Centralizes mapping logic to avoid duplication across actions.
+    /// </summary>
+    private static ProjectResponse ToProjectResponse (Project project)
+    {
+        return new ProjectResponse
         {
             Id = project.Id,
             Name = project.Name,
@@ -78,8 +115,6 @@ public class ProjectsController : ControllerBase
             Status = project.Status.ToString(),
             CreatedAtUtc = project.CreatedAtUtc
         };
-
-        return CreatedAtAction(nameof(GetProjectById), new { id = project.Id }, response);
     }
 
 }
