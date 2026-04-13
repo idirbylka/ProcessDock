@@ -27,7 +27,7 @@ public class ProjectsController : ControllerBase
             Id = Project.Id,
             Name = Project.Name,
             Description = Project.Description,
-            Status = Project.Status.ToString(),
+            Status = Project.Status,
             CreatedAtUtc = Project.CreatedAtUtc
         }).ToListAsync();
 
@@ -71,16 +71,10 @@ public class ProjectsController : ControllerBase
 
         if (project is null)
             return NotFound();
-        
-        if (!Enum.TryParse<ProjectStatus>(request.Status, true, out var status))
-        {
-            ModelState.AddModelError(nameof(request.Status), "Invalid project status!");
-            return ValidationProblem(ModelState);
-        }
 
         project.Name = request.Name;
         project.Description = request.Description;
-        project.Status = status;
+        project.Status = request.Status!.Value;
 
         await _context.SaveChangesAsync();
 
@@ -112,7 +106,7 @@ public class ProjectsController : ControllerBase
             Id = project.Id,
             Name = project.Name,
             Description = project.Description,
-            Status = project.Status.ToString(),
+            Status = project.Status,
             CreatedAtUtc = project.CreatedAtUtc
         };
     }

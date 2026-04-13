@@ -1,16 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using ProcessDock.Domain.Enums;
 
-namespace ProcessDock.Application.DTOs.Projects;
 
-public class UpdateProjectRequest
+namespace ProcessDock.Application.DTOs.WorkItems;
+
+public class UpdateWorkItemRequest
 {
     [Required]
     [MaxLength(100)]
     public string Name { get; set; } = string.Empty;
-    [Required]
     [MaxLength(500)]
-    public string Description { get; set; } = string.Empty;
+    public string? Description { get; set; }
+
     [Required]
-    public ProjectStatus? Status { get; set; }
+    public WorkItemStatus? Status { get; set; }
 }

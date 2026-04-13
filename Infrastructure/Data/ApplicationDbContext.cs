@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Workspace> Workspaces { get; set;}
     public DbSet<Project> Projects { get; set; }
+    public DbSet<WorkItem> WorkItems { get; set; }
 
     
 }
