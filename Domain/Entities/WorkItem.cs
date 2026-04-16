@@ -10,4 +10,5 @@ public class WorkItem
     public WorkItemStatus Status { get; set; } = WorkItemStatus.Pending;
     public int ProjectId { get; set; }
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
+    public ICollection<WorkSession> WorkSessions { get; set; } = new List<WorkSession>();
 }
