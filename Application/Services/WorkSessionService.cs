@@ -76,14 +76,7 @@ public class WorkSessionService : IWorkSessionService
             throw new InvalidOperationException("This work item already has an active work session.");
         }
 
-        var session = new WorkSession
-        {
-            WorkItemId = workItemId,
-            StartedAtUtc = DateTime.UtcNow,
-            Status = WorkSessionStatus.Running,
-            DurationSeconds = 0,
-            CreatedAtUtc = DateTime.UtcNow
-        };
+        var session = new WorkSession(workItemId);
 
         _context.WorkSessions.Add(session);
         await _context.SaveChangesAsync();
@@ -106,18 +99,7 @@ public class WorkSessionService : IWorkSessionService
             return null;
         }
 
-        if (session.Status != WorkSessionStatus.Running)
-        {
-            throw new InvalidOperationException("This work session is not currently running.");
-        }
-
-        var endedAtUtc = DateTime.UtcNow;
-        var duration = endedAtUtc - session.StartedAtUtc;
-
-        session.EndedAtUtc = endedAtUtc;
-        session.DurationSeconds = (int)duration.TotalSeconds;
-        session.Status = WorkSessionStatus.Stopped;
-        session.Notes = request.Notes;
+        session.Stop(request.Notes);
 
         await _context.SaveChangesAsync();
 
