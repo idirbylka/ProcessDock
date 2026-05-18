@@ -24,7 +24,7 @@ A WorkSession represents a period of active work and follows a simple lifecycle:
 * Running
 * Stopped
 
-State transitions are controlled by application logic.
+WorkSession state transitions are handled by the domain entity and orchestrated through the application service.
 
 ---
 
@@ -58,6 +58,7 @@ This enables collaborative execution while maintaining consistency.
 * Duration is derived from the difference between start and end timestamps
 * All timestamps are stored in UTC
 * Duration is persisted in seconds for efficient querying and aggregation
+* Duration calculation is handled by the WorkSession entity
 
 ---
 

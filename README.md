@@ -12,9 +12,7 @@ This project is developed incrementally with a focus on:
 * real-world backend practices
 * long-term scalability
 
-> Note: The project initially started with a "Workspace" concept.
-> During development, the domain model was refined into a project-centered architecture.
-> This reflects an intentional design evolution based on deeper domain understanding.
+
 
 ---
 
@@ -35,9 +33,10 @@ This project is developed incrementally with a focus on:
 #### WorkSession (Time Tracking)
 
 * Start / stop work sessions on a WorkItem
+Enforces one active session per WorkItem (V1 rule)
 * Tracks execution time
-* Enforces one active session per WorkItem (V1 rule)
-* Calculates duration automatically
+* Calculates duration automatically when a session is stopped
+* Encapsulates lifecycle behavior in the WorkSession entity
 
 ---
 
@@ -46,9 +45,9 @@ This project is developed incrementally with a focus on:
 The application follows a layered architecture:
 
 * Controllers → HTTP/API layer
-* Application → Services, DTOs (business logic layer)
-* Domain → Entities, Enums (core business model)
-* Infrastructure → Database (EF Core, SQL Server)
+* Application → Services, DTOs, use-case orchestration
+* Domain → Entities, Enums, domain behavior
+* Infrastructure → Database configuration and EF Core persistence
 
 The WorkSession module introduces a service layer and interface abstraction, separating business logic from request handling.
 
@@ -192,9 +191,12 @@ This project is part of my journey to:
 
 ## Notes
 
-This is an actively evolving project.
+## Notes
+
+This is an actively evolving project.  
 The structure and capabilities will continue to evolve as new requirements are introduced.
 
+The project initially started with a Workspace concept, but the active domain model has since been refined into a project-centered structure. The legacy Workspace module was removed from the active codebase to keep the current model focused and consistent.
 ---
 
 ## Author

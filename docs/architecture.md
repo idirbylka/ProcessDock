@@ -21,9 +21,9 @@ The API layer exposes HTTP endpoints and handles request and response processing
 The Application layer coordinates use cases and contains application-level logic.
 
 * Orchestrates operations across use cases
-* Enforces business rules
 * Defines DTOs and service contracts
-* Coordinates interactions between layers
+* Coordinates interactions between domain and infrastructure
+* Handles application-level rules and workflow decisions
 
 ---
 
@@ -49,9 +49,13 @@ The Infrastructure layer handles persistence and technical concerns.
 
 ## Service Layer
 
-The WorkSession module introduces a service layer to isolate business logic from the API layer.
+The WorkSession module introduces a service layer for use-case orchestration and domain behavior inside the WorkSession entity.
 
-This allows business rules such as session constraints and duration calculation to be handled independently from request handling.
+The application service coordinates operations such as loading entities, enforcing workflow constraints, and saving changes.
+
+The WorkSession entity owns lifecycle-related state changes, including stopping a session, calculating duration, and updating its status.
+
+This keeps request handling, application orchestration, and domain behavior clearly separated.
 
 ---
 
@@ -59,7 +63,7 @@ This allows business rules such as session constraints and duration calculation 
 
 Dependencies are registered per layer through dedicated configuration methods.
 
-This keeps application composition centralized while allowing each layer to define its own requirements.
+This keeps application composition centralised while allowing each layer to define its own requirements.
 
 ---
 
@@ -69,6 +73,7 @@ ProcessDock is developed incrementally:
 
 * Core modules are implemented with minimal structure
 * Additional layers are introduced as complexity increases
-* Business logic is progressively moved into dedicated services
+* Business logic is progressively moved into dedicated services or domain entities where appropriate
+
 
 This approach supports maintainability while allowing the system to evolve as requirements grow.

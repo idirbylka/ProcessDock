@@ -15,7 +15,8 @@ The system currently provides:
 * Project management (top-level structure)
 * WorkItem management (units of work)
 * WorkSession tracking (execution and time measurement)
-* Introduction of a service layer for business logic
+* Service layer for WorkSession use-case orchestration
+* Domain behavior for WorkSession lifecycle and duration calculation
 * Layered architecture with clear separation of concerns
 
 ---

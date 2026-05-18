@@ -43,6 +43,9 @@ Represents a tracked execution of work on a WorkItem.
 
 WorkSessions capture when work occurs and how long it takes.
 
+The entity owns its lifecycle-related state changes, including stopping a session and calculating its duration.
+
+
 **Key Attributes:**
 
 * StartedAtUtc
@@ -71,6 +74,7 @@ Project
 
 * WorkSessions are treated as discrete execution records
 * Duration is derived from timestamps and stored for efficient querying
+* Lifecycle state is protected through entity behavior
 * The model is designed to support future extensions such as:
 
   * concurrent sessions
